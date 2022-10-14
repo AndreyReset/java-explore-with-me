@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
-public class StatServiceImpl implements StatService{
+public class StatServiceImpl implements StatService {
 
     private final StatRepository repository;
 
