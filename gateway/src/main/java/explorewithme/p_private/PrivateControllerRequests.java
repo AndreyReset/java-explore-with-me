@@ -31,7 +31,7 @@ public class PrivateControllerRequests {
 
     @PatchMapping("/{requestId}/cancel")
     public ResponseEntity<Object> cancelRequest(@PathVariable long userId,
-                                                @PathVariable long requestId ) {
+                                                @PathVariable long requestId) {
         log.info("PATCH cancel request, userId={}, requestId={}", userId, requestId);
         return clientRequests.cancelRequest(userId, requestId);
     }

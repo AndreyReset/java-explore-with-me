@@ -12,7 +12,7 @@ public enum EventsSort {
 
     public static Optional<EventsSort> from(String strEventsSort) {
         for (EventsSort es : values()) {
-            if(es.name().equalsIgnoreCase(strEventsSort)) {
+            if (es.name().equalsIgnoreCase(strEventsSort)) {
                 return Optional.of(es);
             }
         }

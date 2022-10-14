@@ -4,8 +4,6 @@ import java.util.Optional;
 
 public class DataToLine {
 
-    private DataToLine() {}
-
     public static <T> String arrToLine(Optional<T[]> data) {
         StringBuilder str = new StringBuilder("");
         if (data.isPresent()) {
