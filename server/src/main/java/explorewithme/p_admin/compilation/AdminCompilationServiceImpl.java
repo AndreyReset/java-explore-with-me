@@ -20,7 +20,7 @@ import static explorewithme.mapper.CompilationMapper.toDto;
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
-public class AdminCompilationServiceImpl implements AdminCompilationService{
+public class AdminCompilationServiceImpl implements AdminCompilationService {
 
     private final CompilationRepository repository;
 

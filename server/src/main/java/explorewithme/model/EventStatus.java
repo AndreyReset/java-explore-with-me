@@ -18,7 +18,7 @@ public enum EventStatus {
         List<EventStatus> eventStatuses = new ArrayList<>();
         for (EventStatus es : values()) {
             for (String state : states) {
-                if(es.name().equalsIgnoreCase(state)) {
+                if (es.name().equalsIgnoreCase(state)) {
                     eventStatuses.add(es);
                 }
             }

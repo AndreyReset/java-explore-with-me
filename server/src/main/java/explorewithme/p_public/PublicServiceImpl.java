@@ -102,8 +102,8 @@ public class PublicServiceImpl implements PublicService {
 
     @Override
     public CategoryDto getCategory(long catId) {
-        return toDto(categoryRepository.findById(catId).
-                orElseThrow(() -> new ObjNotFoundException("Ресурс не найден")));
+        return toDto(categoryRepository.findById(catId)
+                .orElseThrow(() -> new ObjNotFoundException("Ресурс не найден")));
     }
 
     private void addInfoInCompilationAboutEvents(List<Compilation> allComp) {

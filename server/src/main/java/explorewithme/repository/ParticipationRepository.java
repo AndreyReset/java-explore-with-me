@@ -9,15 +9,15 @@ import java.util.Optional;
 
 public interface ParticipationRepository extends JpaRepository<Participation, Long> {
 
-    Optional<Participation> findByRequester_IdAndEvent_Id(long requester_id, long event_id);
+    Optional<Participation> findByRequester_IdAndEvent_Id(long requesterId, long eventId);
 
     List<Participation> findByStatusAndId(ParticipationStatus status, long id);
 
-    List<Participation> findByRequester_Id(long requester_id);
+    List<Participation> findByRequester_Id(long requesterId);
 
-    List<Participation> findByEvent_idAndEvent_Initiator_Id(long event_id, long event_initiator_id);
+    List<Participation> findByEvent_idAndEvent_Initiator_Id(long eventId, long event_initiatorId);
 
-    Optional<Participation> findByIdAndEvent_IdAndEvent_Initiator_Id(long id, long event_id, long event_initiator_id);
+    Optional<Participation> findByIdAndEvent_IdAndEvent_Initiator_Id(long id, long eventId, long event_initiatorId);
 
-    Optional<Participation> findByIdAndRequester_id(long id, long requester_id);
+    Optional<Participation> findByIdAndRequester_id(long id, long requesterId);
 }

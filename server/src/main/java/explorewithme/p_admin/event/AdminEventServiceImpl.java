@@ -53,8 +53,8 @@ public class AdminEventServiceImpl implements AdminEventService {
                 usersFilter(users)
                 .and(statusFilter(eventsStatus(states)))
                 .and(categoriesFilter(categories))
-                .and(rangeTimeFilter(rangeStart, rangeEnd))
-                , pageable
+                .and(rangeTimeFilter(rangeStart, rangeEnd)),
+                pageable
         ).toList().stream().map(EventMapper::toFullDto).collect(Collectors.toList());
     }
 

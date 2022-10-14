@@ -14,7 +14,7 @@ import static explorewithme.lib.util.ValidDateTime.dateToString;
 @Service
 public class StatClient extends BaseClient {
 
-    private final String APP = "ExploreWithMe";
+    private final String app = "ExploreWithMe";
 
     @Autowired
     public StatClient(@Value("${stat-server.url}") String serverUrl, RestTemplateBuilder builder) {
@@ -24,7 +24,7 @@ public class StatClient extends BaseClient {
     public void saveEndpointHit(HttpServletRequest request) {
         System.out.println(request.getHeader("X-USER-URI"));
         System.out.println(request.getHeader("X-USER-IP"));
-        EndpointHitDto endpointHit = new EndpointHitDto(APP,
+        EndpointHitDto endpointHit = new EndpointHitDto(app,
                 request.getHeader("X-USER-URI"), request.getHeader("X-USER-IP"), dateToString(LocalDateTime.now()));
         post("/hit", endpointHit);
     }

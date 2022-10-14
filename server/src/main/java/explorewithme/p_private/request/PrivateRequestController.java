@@ -32,7 +32,7 @@ public class PrivateRequestController {
 
     @PatchMapping("/{requestId}/cancel")
     public ParticipationRequestDto cancelRequest(@PathVariable long userId,
-                                                 @PathVariable long requestId ) {
+                                                 @PathVariable long requestId) {
         log.info("SERVER PATCH cancel request, userId={}, requestId={}", userId, requestId);
         return service.cancelRequest(userId, requestId);
     }

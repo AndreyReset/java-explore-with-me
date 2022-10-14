@@ -25,7 +25,7 @@ import static explorewithme.mapper.ParticipationMapper.toDto;
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
-public class PrivateEventServiceImpl implements PrivateEventService{
+public class PrivateEventServiceImpl implements PrivateEventService {
 
     private final EventsRepository repository;
 

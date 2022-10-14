@@ -12,7 +12,7 @@ import explorewithme.model.Category;
 @Slf4j
 @Validated
 @RequestMapping(path = "/admin/categories")
-public class AdminCategoryController{
+public class AdminCategoryController {
 
     private final AdminCategoryService service;
 

@@ -20,7 +20,7 @@ import static explorewithme.mapper.ParticipationMapper.toDto;
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
-public class PrivateRequestServiceImpl implements PrivateRequestService{
+public class PrivateRequestServiceImpl implements PrivateRequestService {
 
     private final ParticipationRepository repository;
 
