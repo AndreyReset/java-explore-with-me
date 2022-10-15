@@ -1,6 +1,5 @@
 package explorewithme.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
