@@ -11,7 +11,6 @@ import explorewithme.lib.in.NewUserRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor

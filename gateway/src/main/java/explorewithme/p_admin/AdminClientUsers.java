@@ -9,7 +9,6 @@ import explorewithme.lib.client.BaseClient;
 import explorewithme.lib.in.NewUserRequest;
 
 import java.util.Map;
-import java.util.Optional;
 
 import static explorewithme.lib.util.DataToLine.arrToLine;
 
