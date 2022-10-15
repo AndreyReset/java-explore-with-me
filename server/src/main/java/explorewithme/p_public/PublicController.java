@@ -17,7 +17,6 @@ import explorewithme.dto.EventFullDto;
 import explorewithme.dto.EventShortDto;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
