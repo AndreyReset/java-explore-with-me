@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "events", schema = "public")
@@ -64,7 +65,20 @@ public class Event {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "events")
+    @ManyToMany(mappedBy = "events", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Compilation> compilations = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return id == event.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

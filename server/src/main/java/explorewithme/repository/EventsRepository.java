@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Repository
 public interface EventsRepository extends JpaRepository<Event, Long>, JpaSpecificationExecutor<Event> {
 
     List<Event> findEventsByCompilationsId(long compilationsId);

@@ -2,6 +2,8 @@ package explorewithme.p_admin;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -11,9 +13,10 @@ import explorewithme.lib.in.AdminUpdateEventRequest;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import static explorewithme.lib.util.ValidDateTime.checkRangeTime;
+import static explorewithme.lib.util.DateTimeUtils.checkRangeTime;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,15 +28,17 @@ public class AdminControllerEvents {
     private final AdminClientEvents clientEvents;
 
     @GetMapping
-    public ResponseEntity<Object> getEvents(@RequestParam(required = false) Optional<Long[]> users,
-                                             @RequestParam(required = false) Optional<String[]> states,
-                                             @RequestParam(required = false) Optional<Long[]> categories,
-                                             @RequestParam(required = false) Optional<String> rangeStart,
-                                             @RequestParam(required = false) Optional<String> rangeEnd,
-                                             @RequestParam(defaultValue = "false") boolean onlyAvailable,
-                                             @RequestParam(defaultValue = "EVENT_DATE") String sort,
-                                             @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
-                                             @Positive @RequestParam(defaultValue = "10") Integer size) {
+    public ResponseEntity<Object> getEvents(@RequestParam(required = false) Long[] users,
+                                            @RequestParam(required = false) String[] states,
+                                            @RequestParam(required = false) Long[] categories,
+                                            @RequestParam(required = false)
+                                            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
+                                            @RequestParam(required = false)
+                                            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
+                                            @RequestParam(defaultValue = "false") boolean onlyAvailable,
+                                            @RequestParam(defaultValue = "EVENT_DATE") String sort,
+                                            @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+                                            @Positive @RequestParam(defaultValue = "10") Integer size) {
         EventsSort eventsSort = EventsSort.from(sort)
                 .orElseThrow(() -> new IllegalArgumentException("Unknown sort: " + sort));
         checkRangeTime(rangeStart, rangeEnd);

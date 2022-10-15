@@ -9,26 +9,31 @@ import explorewithme.lib.EventsSort;
 import explorewithme.lib.client.BaseClient;
 import explorewithme.lib.in.AdminUpdateEventRequest;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import java.util.Optional;
 
 import static explorewithme.lib.util.DataToLine.arrToLine;
-import static explorewithme.lib.util.DataToLine.varToLine;
 
 
 @Service
 public class AdminClientEvents extends BaseClient {
 
+    private final String pattern;
+
     @Autowired
-    public AdminClientEvents(@Value("${main-server.url}") String serverUrl, RestTemplateBuilder builder) {
+    public AdminClientEvents(@Value("${main-server.url}") String serverUrl,
+                             RestTemplateBuilder builder,
+                             @Value("${dateTimeFormat}") String pattern) {
         super(serverUrl, builder, "/");
+        this.pattern = pattern;
     }
 
-    public ResponseEntity<Object> getEvents(Optional<Long[]> users,
-                                            Optional<String[]> states,
-                                            Optional<Long[]> categories,
-                                            Optional<String> rangeStart,
-                                            Optional<String> rangeEnd,
+    public ResponseEntity<Object> getEvents(Long[] users,
+                                            String[] states,
+                                            Long[] categories,
+                                            LocalDateTime rangeStart,
+                                            LocalDateTime rangeEnd,
                                             boolean onlyAvailable,
                                             EventsSort sort,
                                             Integer from,
@@ -37,8 +42,8 @@ public class AdminClientEvents extends BaseClient {
                 "users", arrToLine(users),
                 "states", arrToLine(states),
                 "categories", arrToLine(categories),
-                "rangeStart", varToLine(rangeStart),
-                "rangeEnd", varToLine(rangeEnd),
+                "rangeStart", rangeStart.format(DateTimeFormatter.ofPattern(pattern)),
+                "rangeEnd", rangeEnd.format(DateTimeFormatter.ofPattern(pattern)),
                 "onlyAvailable", onlyAvailable,
                 "sort", sort,
                 "from", from,

@@ -23,7 +23,7 @@ public class AdminControllerUsers {
     private final AdminClientUsers clientUsers;
 
     @GetMapping
-    public ResponseEntity<Object> getUsers(@RequestParam(required = false) Optional<Long[]> ids,
+    public ResponseEntity<Object> getUsers(@RequestParam(required = false) Long[] ids,
                                            @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                            @Positive @RequestParam(defaultValue = "10") Integer size) {
         log.info("GET users with usersId={}, from={}, size={}", ids, from, size);

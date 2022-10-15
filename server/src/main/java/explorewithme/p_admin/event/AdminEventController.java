@@ -2,12 +2,15 @@ package explorewithme.p_admin.event;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import explorewithme.dto.EventFullDto;
 import explorewithme.lib.EventsSort;
 import explorewithme.lib.in.AdminUpdateEventRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,8 +26,10 @@ public class AdminEventController {
     public List<EventFullDto> getEvents(@RequestParam Long[] users,
                                         @RequestParam String[] states,
                                         @RequestParam Long[] categories,
-                                        @RequestParam String rangeStart,
-                                        @RequestParam String rangeEnd,
+                                        @RequestParam
+                                        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
+                                        @RequestParam
+                                        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
                                         @RequestParam boolean onlyAvailable,
                                         @RequestParam EventsSort sort,
                                         Integer from,

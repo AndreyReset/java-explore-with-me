@@ -21,7 +21,7 @@ public class AdminClientUsers extends BaseClient {
         super(serverUrl, builder, "/");
     }
 
-    public ResponseEntity<Object> getUsers(Optional<Long[]> ids, Integer from, Integer size) {
+    public ResponseEntity<Object> getUsers(Long[] ids, Integer from, Integer size) {
         Map<String, Object> parameters = Map.of(
                 "ids", arrToLine(ids),
                 "from", from,

@@ -6,6 +6,7 @@ import explorewithme.dto.EventFullDto;
 import explorewithme.dto.EventShortDto;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +15,8 @@ public interface PublicService {
     List<EventShortDto> getEvents(String text,
                                   Long[] categories,
                                   Optional<Boolean> paid,
-                                  String rangeStart,
-                                  String rangeEnd,
+                                  LocalDateTime rangeStart,
+                                  LocalDateTime rangeEnd,
                                   Boolean onlyAvailable,
                                   String eventsSort,
                                   Integer from,

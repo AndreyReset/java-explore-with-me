@@ -2,7 +2,9 @@ package explorewithme.p_pablic;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +15,9 @@ import explorewithme.lib.EventsSort;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
-import java.util.Optional;
+import java.time.LocalDateTime;
 
-import static explorewithme.lib.util.ValidDateTime.checkRangeTime;
-import static explorewithme.lib.util.ValidDateTime.isDateTime;
+import static explorewithme.lib.util.DateTimeUtils.checkRangeTime;
 
 
 @Controller
@@ -28,11 +29,13 @@ public class PublicController {
     private final PublicClient publicClient;
 
     @GetMapping("/events")
-    public ResponseEntity<Object> getEvents(@RequestParam(required = false) Optional<String> text,
-                                            @RequestParam(required = false) Optional<String[]> categories,
-                                            @RequestParam(required = false) Optional<Boolean> paid,
-                                            @RequestParam(required = false) Optional<String> rangeStart,
-                                            @RequestParam(required = false) Optional<String> rangeEnd,
+    public ResponseEntity<Object> getEvents(@RequestParam(required = false) String text,
+                                            @RequestParam(required = false) String[] categories,
+                                            @RequestParam(required = false) Boolean paid,
+                                            @RequestParam(required = false)
+                                            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
+                                            @RequestParam(required = false)
+                                            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
                                             @RequestParam(defaultValue = "false") Boolean onlyAvailable,
                                             @RequestParam(defaultValue = "EVENT_DATE") String sort,
                                             @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
@@ -40,8 +43,6 @@ public class PublicController {
                                             HttpServletRequest oldRequest) {
         EventsSort eventsSort = EventsSort.from(sort)
                 .orElseThrow(() -> new IllegalArgumentException("Unknown sort: " + sort));
-        isDateTime(rangeStart);
-        isDateTime(rangeEnd);
         checkRangeTime(rangeStart, rangeEnd);
         log.info("GET events with text={}, categories={}, paid={}, rangeStart={}, rangeEnd={}, " +
                         "onlyAvailable={}, sort={}, form={}, size={}",
@@ -57,7 +58,7 @@ public class PublicController {
     }
 
     @GetMapping("/compilations")
-    public ResponseEntity<Object> getCompilations(@RequestParam(required = false) Optional<Boolean> pinned,
+    public ResponseEntity<Object> getCompilations(@RequestParam(required = false) Boolean pinned,
                                                   @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                                   @Positive @RequestParam(defaultValue = "10") Integer size) {
         log.info("GET compilations with pinned={}, from={}, size={}", pinned, from, size);

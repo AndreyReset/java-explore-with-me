@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -22,9 +23,8 @@ public class NewEventDto {
     @Length(min = 20, max = 7000, message = "Полное описание не менее 20 и не более 7000 символов")
     private String description;
 
-    @NotBlank(message = "Время события должно быть указано")
     @NotNull(message = "Время события должно быть указано")
-    private String eventDate;
+    private LocalDateTime eventDate;
 
     @NotNull(message = "Координаты должны быть указаны")
     private Location location;

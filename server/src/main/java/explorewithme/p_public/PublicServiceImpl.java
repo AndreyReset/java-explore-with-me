@@ -23,6 +23,7 @@ import explorewithme.repository.EventsRepository;
 import explorewithme.stat.StatClient;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,7 +35,6 @@ import static explorewithme.p_public.SpecificationForFind.*;
 
 @RequiredArgsConstructor
 @Service
-@Transactional(readOnly = true)
 public class PublicServiceImpl implements PublicService {
 
     private final CategoryRepository categoryRepository;
@@ -49,8 +49,8 @@ public class PublicServiceImpl implements PublicService {
     public List<EventShortDto> getEvents(String textIn,
                                          Long[] categories,
                                          Optional<Boolean> paidIn,
-                                         String rangeStart,
-                                         String rangeEnd,
+                                         LocalDateTime rangeStart,
+                                         LocalDateTime rangeEnd,
                                          Boolean onlyAvailable,
                                          String eventsSort,
                                          Integer from,

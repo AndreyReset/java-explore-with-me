@@ -10,8 +10,6 @@ import explorewithme.model.Location;
 import java.util.ArrayList;
 import java.util.List;
 
-import static explorewithme.lib.util.ValidDateTime.getDateTime;
-
 public class EventMapper {
 
     public static List<EventShortDto> toShortDto(List<Event> events) {
@@ -62,7 +60,7 @@ public class EventMapper {
                 .annotation(in.getAnnotation())
                 .category(category)
                 .description(in.getDescription())
-                .eventDate(getDateTime(in.getEventDate()))
+                .eventDate(in.getEventDate())
                 .location(toLocation(in.getLocation()))
                 .paid(in.isPaid())
                 .participantLimit(in.getParticipantLimit())

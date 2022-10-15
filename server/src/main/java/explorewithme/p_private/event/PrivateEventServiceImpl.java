@@ -18,7 +18,6 @@ import explorewithme.repository.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static explorewithme.lib.util.ValidDateTime.getDateTime;
 import static explorewithme.mapper.EventMapper.*;
 import static explorewithme.mapper.ParticipationMapper.toDto;
 
@@ -63,7 +62,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
             oldEvent.setDescription(event.getDescription());
         }
         if (event.getEventDate() != null) {
-            oldEvent.setEventDate(getDateTime(event.getEventDate()));
+            oldEvent.setEventDate(event.getEventDate());
         }
         if (event.getPaid() != null) {
             oldEvent.setPaid(event.getPaid());

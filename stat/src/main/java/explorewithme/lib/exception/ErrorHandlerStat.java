@@ -22,43 +22,49 @@ public class ErrorHandlerStat {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public ResponseEntity<Object> validationErrorResponse(MethodArgumentNotValidException e) {
-        log.info(String.valueOf(errorResponse(e, HttpStatus.BAD_REQUEST)));
-        return new ResponseEntity<>(errorResponse(e, HttpStatus.BAD_REQUEST), defaultHeaders(), HttpStatus.BAD_REQUEST);
+        ErrorResponse errorResponse = errorResponse(e, HttpStatus.BAD_REQUEST);
+        log.info(String.valueOf(errorResponse));
+        return new ResponseEntity<>(errorResponse, defaultHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseBody
     public ResponseEntity<Object> validationErrorResponse(IllegalArgumentException e) {
-        log.info(String.valueOf(errorResponse(e, HttpStatus.BAD_REQUEST)));
-        return new ResponseEntity<>(errorResponse(e, HttpStatus.BAD_REQUEST), defaultHeaders(), HttpStatus.BAD_REQUEST);
+        ErrorResponse errorResponse = errorResponse(e, HttpStatus.BAD_REQUEST);
+        log.info(String.valueOf(errorResponse));
+        return new ResponseEntity<>(errorResponse, defaultHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseBody
     public ResponseEntity<Object> validationErrorResponse(ConstraintViolationException e) {
-        log.info(String.valueOf(errorResponse(e, HttpStatus.BAD_REQUEST)));
-        return new ResponseEntity<>(errorResponse(e, HttpStatus.BAD_REQUEST), defaultHeaders(), HttpStatus.BAD_REQUEST);
+        ErrorResponse errorResponse = errorResponse(e, HttpStatus.BAD_REQUEST);
+        log.info(String.valueOf(errorResponse));
+        return new ResponseEntity<>(errorResponse, defaultHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ObjNotFoundException.class)
     @ResponseBody
-    public ResponseEntity<?> objNotFound(ObjNotFoundException e) {
-        log.info(String.valueOf(errorResponse(e, HttpStatus.NOT_FOUND)));
-        return new ResponseEntity<>(errorResponse(e, HttpStatus.NOT_FOUND), defaultHeaders(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> objNotFound(ObjNotFoundException e) {
+        ErrorResponse errorResponse = errorResponse(e, HttpStatus.NOT_FOUND);
+        log.info(String.valueOf(errorResponse));
+        return new ResponseEntity<>(errorResponse, defaultHeaders(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseBody
     public ResponseEntity<Object> badRequest(BadRequestException e) {
-        log.info(String.valueOf(errorResponse(e, HttpStatus.BAD_REQUEST)));
-        return new ResponseEntity<>(errorResponse(e, HttpStatus.BAD_REQUEST), defaultHeaders(), HttpStatus.BAD_REQUEST);
+        ErrorResponse errorResponse = errorResponse(e, HttpStatus.BAD_REQUEST);
+        log.info(String.valueOf(errorResponse));
+        return new ResponseEntity<>(errorResponse, defaultHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
     @ResponseBody
     public ResponseEntity<Object> objNotFound(EmptyResultDataAccessException e) {
-        log.info(String.valueOf(errorResponse(e, HttpStatus.NOT_FOUND)));
-        return new ResponseEntity<>(errorResponse(e, HttpStatus.NOT_FOUND), defaultHeaders(), HttpStatus.NOT_FOUND);
+        ErrorResponse errorResponse = errorResponse(e, HttpStatus.NOT_FOUND);
+        log.info(String.valueOf(errorResponse));
+        return new ResponseEntity<>(errorResponse, defaultHeaders(), HttpStatus.NOT_FOUND);
     }
 
     private HttpHeaders defaultHeaders() {

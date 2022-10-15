@@ -51,20 +51,14 @@ public class SpecificationForFind {
         };
     }
 
-    public static Specification<Event> rangeTimeFilter(String start, String end) {
+    public static Specification<Event> rangeTimeFilter(LocalDateTime start, LocalDateTime end) {
         return (root, query, criteriaBuilder) -> {
-            LocalDateTime rangeStart = null;
-            LocalDateTime rangeEnd = null;
-            if (!start.isEmpty())
-                rangeStart = LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            if (!end.isEmpty())
-                rangeEnd = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-            if (rangeStart == null || rangeEnd == null) {
-                rangeStart = LocalDateTime.now();
-                return criteriaBuilder.greaterThan(root.get("eventDate"), rangeStart);
+            LocalDateTime startTime = start;
+            if (startTime == null || end == null) {
+                startTime = LocalDateTime.now();
+                return criteriaBuilder.greaterThan(root.get("eventDate"), startTime);
             }
-            return criteriaBuilder.between(root.get("eventDate"), rangeStart, rangeEnd);
+            return criteriaBuilder.between(root.get("eventDate"), start, end);
         };
     }
 

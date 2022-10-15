@@ -18,10 +18,10 @@ import explorewithme.pageable.OffsetLimitPageable;
 import explorewithme.repository.CategoryRepository;
 import explorewithme.repository.EventsRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static explorewithme.lib.util.ValidDateTime.getDateTime;
 import static explorewithme.mapper.EventMapper.toFullDto;
 import static explorewithme.model.EventStatus.eventsStatus;
 import static explorewithme.p_public.SpecificationForFind.*;
@@ -39,8 +39,8 @@ public class AdminEventServiceImpl implements AdminEventService {
     public List<EventFullDto> getEvents(Long[] users,
                                         String[] states,
                                         Long[] categories,
-                                        String rangeStart,
-                                        String rangeEnd,
+                                        LocalDateTime rangeStart,
+                                        LocalDateTime rangeEnd,
                                         boolean onlyAvailable,
                                         EventsSort eventSort,
                                         Integer from,
@@ -73,7 +73,7 @@ public class AdminEventServiceImpl implements AdminEventService {
         if (dto.getDescription() != null)
             event.setDescription(dto.getDescription());
         if (dto.getEventDate() != null)
-            event.setEventDate(getDateTime(dto.getEventDate()));
+            event.setEventDate(dto.getEventDate());
         if (dto.getLocation() != null) {
             event.getLocation().setLon(dto.getLocation().getLon());
             event.getLocation().setLat(dto.getLocation().getLat());

@@ -5,6 +5,7 @@ import explorewithme.dto.EventFullDto;
 import explorewithme.lib.EventsSort;
 import explorewithme.lib.in.AdminUpdateEventRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AdminEventService {
@@ -12,8 +13,8 @@ public interface AdminEventService {
     List<EventFullDto> getEvents(Long[] users,
                                  String[] states,
                                  Long[] categories,
-                                 String rangeStart,
-                                 String rangeEnd,
+                                 LocalDateTime rangeStart,
+                                 LocalDateTime rangeEnd,
                                  boolean onlyAvailable,
                                  EventsSort sort,
                                  Integer from,

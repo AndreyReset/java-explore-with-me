@@ -9,8 +9,9 @@ import explorewithme.lib.EventsSort;
 import explorewithme.lib.client.BaseClient;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import java.util.Optional;
 
 import static explorewithme.lib.util.DataToLine.arrToLine;
 import static explorewithme.lib.util.DataToLine.varToLine;
@@ -18,16 +19,21 @@ import static explorewithme.lib.util.DataToLine.varToLine;
 @Service
 public class PublicClient extends BaseClient {
 
+    private final String pattern;
+
     @Autowired
-    public PublicClient(@Value("${main-server.url}") String serverUrl, RestTemplateBuilder builder) {
+    public PublicClient(@Value("${main-server.url}") String serverUrl,
+                        RestTemplateBuilder builder,
+                        @Value("${dateTimeFormat}") String pattern) {
         super(serverUrl, builder, "/");
+        this.pattern = pattern;
     }
 
-    public ResponseEntity<Object> getEvents(Optional<String> text,
-                                            Optional<String[]> categories,
-                                            Optional<Boolean> paid,
-                                            Optional<String> rangeStart,
-                                            Optional<String> rangeEnd,
+    public ResponseEntity<Object> getEvents(String text,
+                                            String[] categories,
+                                            Boolean paid,
+                                            LocalDateTime rangeStart,
+                                            LocalDateTime rangeEnd,
                                             Boolean onlyAvailable,
                                             EventsSort eventsSort,
                                             Integer from,
@@ -37,8 +43,8 @@ public class PublicClient extends BaseClient {
                 "text", varToLine(text),
                 "categories", arrToLine(categories),
                 "paid", varToLine(paid),
-                "rangeStart", varToLine(rangeStart),
-                "rangeEnd", varToLine(rangeEnd),
+                "rangeStart", rangeStart.format(DateTimeFormatter.ofPattern(pattern)),
+                "rangeEnd", rangeEnd.format(DateTimeFormatter.ofPattern(pattern)),
                 "onlyAvailable", onlyAvailable,
                 "eventsSort", eventsSort,
                 "from", from,
@@ -54,7 +60,7 @@ public class PublicClient extends BaseClient {
         return get("events/" + id, oldRequest);
     }
 
-    public ResponseEntity<Object> getCompilations(Optional<Boolean> pinned, Integer from, Integer size) {
+    public ResponseEntity<Object> getCompilations(Boolean pinned, Integer from, Integer size) {
         Map<String, Object> parameters = Map.of(
                 "pinned", varToLine(pinned),
                 "from", from,

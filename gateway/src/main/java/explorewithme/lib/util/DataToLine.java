@@ -1,13 +1,11 @@
 package explorewithme.lib.util;
 
-import java.util.Optional;
-
 public class DataToLine {
 
-    public static <T> String arrToLine(Optional<T[]> data) {
+    public static <T> String arrToLine(T[] data) {
         StringBuilder str = new StringBuilder("");
-        if (data.isPresent()) {
-            for (T el : data.get()) {
+        if (data != null) {
+            for (T el : data) {
                 str.append(el);
                 str.append(",");
             }
@@ -16,9 +14,9 @@ public class DataToLine {
         return str.toString();
     }
 
-    public static <T> String varToLine(Optional<T> data) {
+    public static <T> String varToLine(T data) {
         StringBuilder str = new StringBuilder("");
-        data.ifPresent(str::append);
+        if (data != null) str.append(data);
         return str.toString();
     }
 }

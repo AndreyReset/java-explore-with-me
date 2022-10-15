@@ -23,6 +23,5 @@ public class ErrorResponse {
     private final String status;
 
     //дата и время когда произошла ошибка
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private final LocalDateTime timestamp;
 }

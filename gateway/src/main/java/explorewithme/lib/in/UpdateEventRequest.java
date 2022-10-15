@@ -8,6 +8,7 @@ import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -26,7 +27,7 @@ public class UpdateEventRequest {
     @Length(min = 20, max = 7000, message = "Полное описание не менее 20 и не более 7000 символов")
     private String description;
 
-    private String eventDate;
+    private LocalDateTime eventDate;
 
     private Boolean paid;
 

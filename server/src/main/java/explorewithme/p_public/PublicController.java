@@ -2,8 +2,10 @@ package explorewithme.p_public;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,8 @@ import explorewithme.dto.EventFullDto;
 import explorewithme.dto.EventShortDto;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Null;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +34,12 @@ public class PublicController {
     public List<EventShortDto> getEvents(@RequestParam String text,
                                          @RequestParam Long[] categories,
                                          @RequestParam Optional<Boolean> paid,
-                                         @RequestParam String rangeStart,
-                                         @RequestParam String rangeEnd,
+                                         @Nullable
+                                         @RequestParam
+                                         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
+                                         @Nullable
+                                         @RequestParam
+                                         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
                                          @RequestParam Boolean onlyAvailable,
                                          @RequestParam String eventsSort,
                                          @RequestParam Integer from,
