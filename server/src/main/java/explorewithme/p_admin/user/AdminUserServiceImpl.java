@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static explorewithme.mapper.UserMapper.toDto;
-import static explorewithme.mapper.UserMapper.toDto;
 
 @RequiredArgsConstructor
 @Service

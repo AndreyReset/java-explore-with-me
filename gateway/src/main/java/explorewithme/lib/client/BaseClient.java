@@ -62,6 +62,9 @@ public class BaseClient {
         return makeAndSendRequest(HttpMethod.POST, path, userId, null, parameters, body);
     }
 
+    protected <T> ResponseEntity<Object> put(String path) {
+        return put(path, null, null);
+    }
     protected <T> ResponseEntity<Object> put(String path, T body) {
         return put(path, null, body);
     }
