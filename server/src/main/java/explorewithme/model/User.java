@@ -25,6 +25,8 @@ public class User {
 
     private String name;
 
+    private boolean subscriptionFlag;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
